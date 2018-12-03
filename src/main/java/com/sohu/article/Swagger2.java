@@ -29,7 +29,7 @@ public class Swagger2 {
         return new ApiInfoBuilder()
                 .title("swagger构建api文档")
                 .description("简单优雅的restfun风格")
-                .termsOfServiceUrl("http://139.159.188.212:8080")
+                .termsOfServiceUrl("http://localhost:8089")
                 .version("1.0")
                 .build();
     }
