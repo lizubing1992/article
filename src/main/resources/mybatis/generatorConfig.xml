@@ -25,10 +25,33 @@
         <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
 
+        <!-- 查询单条数据插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.SelectOneByExamplePlugin"/>
+        <!-- 查询结果选择性返回插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.SelectSelectivePlugin"/>
+        <!-- Example Criteria 增强插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.ExampleEnhancedPlugin"/>
+        <!-- 数据Model属性对应Column获取插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin"/>
+        <!-- swagger支持 -->
         <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc">
             <property name="apiModelAnnotationPackage" value="io.swagger.annotations.ApiModel" />
             <property name="apiModelPropertyAnnotationPackage" value="io.swagger.annotations.ApiModelProperty" />
         </plugin>
+
+        <!-- 逻辑删除插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.LogicalDeletePlugin">
+            <!-- 这里配置的是全局逻辑删除列和逻辑删除值，当然在table中配置的值会覆盖该全局配置 -->
+            <!-- 逻辑删除列类型只能为数字、字符串或者布尔类型 -->
+            <property name="logicalDeleteColumn" value="deleted"/>
+            <!-- 逻辑删除-已删除值 -->
+            <property name="logicalDeleteValue" value="1"/>
+            <!-- 逻辑删除-未删除值 -->
+            <property name="logicalUnDeleteValue" value="0"/>
+        </plugin>
+        <!-- 乐观锁插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.OptimisticLockerPlugin"/>
+
         <!-- 是否取消注释 -->
         <commentGenerator>
             <property name="suppressAllComments"  value="false"/>
@@ -40,7 +63,7 @@
                         userId="${jdbc.username}" password="${jdbc.password}"/>-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/spider?useUnicode = true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"
-                        userId="root" password="lzb5989148"/>
+                        userId="root" password="root"/>
 
         <!-- 生成实体类 -->
         <javaModelGenerator targetPackage="com.sohu.article.model"
@@ -56,10 +79,13 @@
                              targetProject="src/main/java" type="XMLMAPPER"/>
 
         <!-- 配置表信息,不生成帮助类examples-->
-        <table schema="" tableName="article" domainObjectName="ArticleEntity"
+        <table schema="" tableName="wx_user" domainObjectName="WxUserEntity"
                enableCountByExample="true" enableDeleteByExample="true"
                enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
-               enableSelectByExample="true" enableUpdateByExample="true"/>
+               enableSelectByExample="true" enableUpdateByExample="true">
+            <property name="versionColumn" value="version"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
     </context>
 </generatorConfiguration>

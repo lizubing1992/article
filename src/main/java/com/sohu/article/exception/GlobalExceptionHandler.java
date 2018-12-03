@@ -1,5 +1,7 @@
 package com.sohu.article.exception;
 
+import com.sohu.article.base.ResponseBuilder;
+import com.sohu.article.base.WebResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,17 +15,17 @@ public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(value = TipException.class)
-    public String tipException(Exception e) {
+    public WebResponse<String> tipException(Exception e) {
         LOGGER.error("find exception:e={}",e.getMessage());
         e.printStackTrace();
-        return "comm/error_500";
+        return ResponseBuilder.buildFailResponse(e.getMessage());
     }
 
 
     @ExceptionHandler(value = Exception.class)
-    public String exception(Exception e){
+    public WebResponse<String> exception(Exception e){
         LOGGER.error("find exception:e={}",e.getMessage());
         e.printStackTrace();
-        return "comm/error_404";
+        return ResponseBuilder.buildFailResponse(e.getMessage());
     }
 }

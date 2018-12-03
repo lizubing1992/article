@@ -11,7 +11,7 @@ import java.util.List;
 @Api("分页返回Bean")
 public class PageResultBean<T> {
     @ApiModelProperty("业务数据模型Bean")
-    private List<T> list;
+    private List<T> newlist;
 
     private Integer total;
 
@@ -27,19 +27,19 @@ public class PageResultBean<T> {
     }
 
     public PageResultBean(List<T> list) {
-        this.list = list;
+        this.newlist = list;
     }
 
     public PageResultBean(List<T> list, Integer total) {
-        this.list = list;
+        this.newlist = list;
         this.total = total;
     }
 
     public List<T> getList() {
-        return list;
+        return newlist;
     }
 
     public void setList(List<T> list) {
-        this.list = list;
+        this.newlist = list;
     }
 }
