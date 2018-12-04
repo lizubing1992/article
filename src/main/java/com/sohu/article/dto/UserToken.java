@@ -1,13 +1,22 @@
 package com.sohu.article.dto;
 
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
+@ApiModel
 public class UserToken {
+    @ApiModelProperty("用户id")
     private Integer userId;
+    @ApiModelProperty("用户token")
     private String token;
+    @ApiModelProperty("微信生成的sessionKey")
     private String sessionKey;
+    @ApiModelProperty("加入时间")
     private Date expireTime;
+    @ApiModelProperty("更新时间")
     private Date updateTime;
 
     public String getSessionKey() {

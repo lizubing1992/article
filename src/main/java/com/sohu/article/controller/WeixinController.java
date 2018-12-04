@@ -32,7 +32,6 @@ public class WeixinController {
     private UserService userService;
 
     @ApiOperation(value="微信登录", notes="微信登录")
-    @ApiImplicitParam(name = "id", value = "客户id", required = true, dataType = "string", paramType = "query")
     @PostMapping("/login")
     public WebResponse<UserToken> wexinLogin(@RequestBody WxLoginInfo wxLoginInfo,HttpServletRequest request){
         return ResponseBuilder.build(userService.wxLogin(wxLoginInfo,request));
