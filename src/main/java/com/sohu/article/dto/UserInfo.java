@@ -7,7 +7,7 @@ public class UserInfo {
     private String province;
     private String city;
     private String language;
-    private Byte gender;
+    private String gender;
 
     public void setCountry(String country) {
         this.country = country;
@@ -25,7 +25,7 @@ public class UserInfo {
         this.language = language;
     }
 
-    public void setGender(Byte gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -45,7 +45,7 @@ public class UserInfo {
         return language;
     }
 
-    public Byte getGender() {
+    public String getGender() {
         return gender;
     }
 

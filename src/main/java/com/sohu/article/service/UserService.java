@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface UserService {
     WxUserEntity queryByOid(String openId);
 
+    WxUserEntity queryByName(String name);
     void add(WxUserEntity user);
 
     void update(WxUserEntity user);

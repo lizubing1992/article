@@ -39,6 +39,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public WxUserEntity queryByName(String name) {
+        WxUserEntityExample example = new WxUserEntityExample();
+        example.or().andNicknameEqualTo(name);
+        return userEntityMapper.selectOneByExample(example);
+    }
+
+    @Override
     public void add(WxUserEntity user) {
         userEntityMapper.insert(user);
     }
@@ -56,7 +63,7 @@ public class UserServiceImpl implements UserService {
             throw  new TipException("参数不正确");
         }
 
-        String sessionKey = null;
+        /*String sessionKey = null;
         String openId = null;
         try {
             WxMaJscode2SessionResult result = this.wxService.getUserService().getSessionInfo(code);
@@ -68,21 +75,20 @@ public class UserServiceImpl implements UserService {
 
         if (sessionKey == null || openId == null) {
             throw  new TipException("请求openId以及sessionkey异常！");
-        }
+        }*/
 
-        WxUserEntity user = this.queryByOid(openId);
+        WxUserEntity user = this.queryByName(userInfo.getNickName());
         if (user == null) {
             user = new WxUserEntity();
             user.setUsername(userInfo.getNickName());  // 其实没有用，因为用户没有真正注册
-            user.setUserPwd(openId);                  // 其实没有用，因为用户没有真正注册
-            user.setWeixinOpenid(openId);
+            user.setUserPwd("");                  // 其实没有用，因为用户没有真正注册
+            user.setWeixinOpenid("");
             user.setAvatar(userInfo.getAvatarUrl());
             user.setNickname(userInfo.getNickName());
             user.setGender(userInfo.getGender());
             user.setLastLoginTime(new Date());
             user.setLastLoginIp(IpUtil.client(request));
             user.setAddTime(new Date());
-
             this.add(user);
         } else {
             user.setLastLoginTime(new Date());
@@ -90,7 +96,7 @@ public class UserServiceImpl implements UserService {
             this.update(user);
         }
         UserToken userToken = UserTokenManager.generateToken(user.getId());
-        userToken.setSessionKey(sessionKey);
+//        userToken.setSessionKey(sessionKey);
         return userToken;
     }
 }
