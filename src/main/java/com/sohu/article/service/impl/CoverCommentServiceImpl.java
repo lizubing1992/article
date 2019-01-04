@@ -49,7 +49,7 @@ public class CoverCommentServiceImpl implements CoverCommentService {
         example.setOrderByClause("comment_time desc");
         long total = coverCommentEntityMapper.countByExample(example);
         PageHelper.startPage(pageNo, pageSize);
-        List<CoverCommentEntity> list = coverCommentEntityMapper.selectByExample(example);
+        List<CoverCommentEntity> list = coverCommentEntityMapper.selectByExampleWithBLOBs(example);
         PageInfo<CoverCommentEntity> pageInfo = new PageInfo<>(list);
         pageResultBean.setTotal((int) total);
         CommentDetailEntity detailEntity = null;
@@ -62,6 +62,7 @@ public class CoverCommentServiceImpl implements CoverCommentService {
             }else {
                 detailEntity.setUser(new CoverUserEntity());
             }
+            commentDetailList.add(detailEntity);
         }
         pageResultBean.setList(commentDetailList);
         return pageResultBean;

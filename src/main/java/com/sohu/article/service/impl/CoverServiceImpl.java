@@ -39,7 +39,6 @@ public class CoverServiceImpl implements CoverService {
         PageResultBean<CoverImgEntity> pageResultBean = new PageResultBean<>();
         pageNo = pageNo < 0 || pageNo > WebConst.MAX_PAGE ? 1 : pageNo;
         CoverImgEntityExample example = new CoverImgEntityExample();
-        example.setOrderByClause("publish_time desc");
         long total = coverImgEntityMapper.countByExample(example);
         PageHelper.startPage(pageNo, pageSize);
         List<CoverImgEntity> list = coverImgEntityMapper.selectByExample(example);
@@ -56,7 +55,7 @@ public class CoverServiceImpl implements CoverService {
         CoverImgEntity imgEntity = coverImgEntityMapper.selectOneByExample(example);
         if(imgEntity != null){
             imgEntity.setZanNums(imgEntity.getZanNums()+1);
-            coverImgEntityMapper.updateWithVersionByPrimaryKeySelective(imgEntity.getVersion()+1,imgEntity);
+            coverImgEntityMapper.updateByPrimaryKeySelective(imgEntity);
         }else {
             throw new TipException("没有找到对应的贺卡信息");
         }
