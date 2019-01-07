@@ -1,4 +1,4 @@
-package com.sohu.article.controller;
+package com.sohu.article.controller.cover;
 
 import com.sohu.article.base.PageResultBean;
 import com.sohu.article.base.ResponseBuilder;

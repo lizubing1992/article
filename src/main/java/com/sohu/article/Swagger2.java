@@ -17,18 +17,30 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class Swagger2 {
     @Bean
-    public Docket createRestApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
+    public Docket createArticleApi() {
+        return  (new Docket(DocumentationType.SWAGGER_2))
+                .apiInfo(this.apiInfo("文章相关的API"))
+                .enable(true)
+                .groupName("article")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sohu.article.controller"))
-                .paths(PathSelectors.any())
-                .build();
+                .apis(RequestHandlerSelectors.basePackage("com.sohu.article.controller.article"))
+                .paths(PathSelectors.any()).build();
     }
-    private ApiInfo apiInfo() {
+
+    @Bean
+    public Docket createCoverApi() {
+       return  (new Docket(DocumentationType.SWAGGER_2))
+                .apiInfo(this.apiInfo("贺卡相关的API"))
+                .enable(true)
+                .groupName("card")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.sohu.article.controller.cover"))
+                .paths(PathSelectors.any()).build();
+
+    }
+    private ApiInfo apiInfo(String title) {
         return new ApiInfoBuilder()
-                .title("swagger构建api文档")
-                .description("简单优雅的restfun风格")
+                .title(title)
                 .termsOfServiceUrl("http://localhost:8089")
                 .version("1.0")
                 .build();
