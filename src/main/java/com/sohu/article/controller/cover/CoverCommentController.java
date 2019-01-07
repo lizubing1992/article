@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,7 @@ public class CoverCommentController {
     @Autowired
     private CoverCommentService commentService;
 
-    @ApiOperation(value="获取文章列表", notes="获取文章列表")
+    @ApiOperation(value="获取评论列表", notes="获取评论列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "coverId", value = "贺卡id", required = true, dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "pageNo", value = "当前页", required = false, dataType = "int", paramType = "query",defaultValue = "1"),
@@ -42,7 +43,7 @@ public class CoverCommentController {
             @ApiImplicitParam(name = "comment", value = "贺卡评论", required = true, dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "userId", value = "用户id", required = true, dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "coverId", value = "贺卡id", required = true, dataType = "int", paramType = "query")})
-    @GetMapping("/add")
+    @PostMapping("/add")
     public WebResponse<PageResultBean<String>> add(String comment,Integer userId, Integer coverId){
         commentService.addComment(comment,userId,coverId);
         return ResponseBuilder.build("评论添加成功！");

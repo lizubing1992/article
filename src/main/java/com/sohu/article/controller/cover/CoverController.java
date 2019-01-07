@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +39,7 @@ public class CoverController {
     @ApiOperation(value="新增加贺卡", notes="新增加贺卡")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "imgUrl", value = "图片路径url", required = true, dataType = "String", paramType = "query")})
-    @GetMapping("/img/add")
+    @PostMapping("/img/add")
     public WebResponse<String> add(String  imgUrl){
          coverService.addCoverImg(imgUrl);
          return ResponseBuilder.build("贺卡加入成功!");
@@ -49,7 +50,7 @@ public class CoverController {
     @ApiOperation(value="贺卡点赞", notes="贺卡点赞")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "coverId", value = "贺卡id", required = true, dataType = "Integer", paramType = "query")})
-    @GetMapping("/click")
+    @PostMapping("/click")
     public WebResponse<String> coverClick(Integer  coverId){
         coverService.coverClick(coverId);
         return ResponseBuilder.build("贺卡点赞成功!");

@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,7 @@ public class CoverWishController {
     private CoverWishService coverWishService;
 
     @ApiOperation(value = "寄语列表", notes = "寄语列表")
-    @PostMapping("/list")
+    @GetMapping("/list")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "wishType", value = "寄语类型", required = true, dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "pageNo", value = "页数", required = false, dataType = "int", defaultValue = "1", paramType = "query"),

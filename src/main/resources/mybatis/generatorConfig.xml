@@ -79,7 +79,7 @@
                              targetProject="src/main/java" type="XMLMAPPER"/>
 
         <!-- 配置表信息,不生成帮助类examples-->
-        <table schema="" tableName="cover_user" domainObjectName="CoverUserEntity"
+        <table schema="" tableName="cover_wishes" domainObjectName="CoverWishesEntity"
                enableCountByExample="true" enableDeleteByExample="true"
                enableSelectByPrimaryKey="true" enableDeleteByPrimaryKey="true"
                enableUpdateByPrimaryKey="true"
