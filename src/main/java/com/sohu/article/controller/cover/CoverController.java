@@ -50,7 +50,7 @@ public class CoverController {
     @ApiOperation(value="贺卡点赞", notes="贺卡点赞")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "coverId", value = "贺卡id", required = true, dataType = "Integer", paramType = "query")})
-    @PostMapping("/click")
+    @GetMapping("/click")
     public WebResponse<String> coverClick(Integer  coverId){
         coverService.coverClick(coverId);
         return ResponseBuilder.build("贺卡点赞成功!");

@@ -15,4 +15,6 @@ public interface CoverService {
     PageResultBean<CoverImgEntity> list(Integer pageNo, Integer pageSize);
 
     void coverClick(Integer coverId);
+
+    void updateCoverCommentNum(Integer commentNum,Integer coverId);
 }

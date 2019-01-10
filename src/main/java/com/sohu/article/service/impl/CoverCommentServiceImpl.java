@@ -10,6 +10,7 @@ import com.sohu.article.model.CoverCommentEntity;
 import com.sohu.article.model.CoverCommentEntityExample;
 import com.sohu.article.model.CoverUserEntity;
 import com.sohu.article.service.CoverCommentService;
+import com.sohu.article.service.CoverService;
 import com.sohu.article.service.CoverUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class CoverCommentServiceImpl implements CoverCommentService {
     @Autowired
     private CoverUserService userService;
 
+    @Autowired
+    private CoverService coverService;
+
     @Override
     public void addComment(String comment, Integer userId, Integer coverId) {
         CoverCommentEntity entity = new CoverCommentEntity();
@@ -38,6 +42,13 @@ public class CoverCommentServiceImpl implements CoverCommentService {
         entity.setCoverId(coverId);
         entity.setCommentTime(new Date());
         coverCommentEntityMapper.insert(entity);
+        //查找对应卡片的评论数
+        CoverCommentEntityExample example = new CoverCommentEntityExample();
+        CoverCommentEntityExample.Criteria criteria = example.createCriteria();
+        criteria.andCoverIdEqualTo(coverId);
+        long count = coverCommentEntityMapper.countByExample(example);
+        //更新卡片表评论数
+        coverService.updateCoverCommentNum((int) count, coverId);
     }
 
     @Override
@@ -46,6 +57,8 @@ public class CoverCommentServiceImpl implements CoverCommentService {
         List<CommentDetailEntity> commentDetailList = new ArrayList<>();
         pageNo = pageNo < 0 || pageNo > WebConst.MAX_PAGE ? 1 : pageNo;
         CoverCommentEntityExample example = new CoverCommentEntityExample();
+        CoverCommentEntityExample.Criteria criteria = example.createCriteria();
+        criteria.andCoverIdEqualTo(coverId);
         example.setOrderByClause("comment_time desc");
         long total = coverCommentEntityMapper.countByExample(example);
         PageHelper.startPage(pageNo, pageSize);
@@ -57,9 +70,9 @@ public class CoverCommentServiceImpl implements CoverCommentService {
             detailEntity = new CommentDetailEntity();
             detailEntity.setComment(entity);
             CoverUserEntity userEntity = userService.queryById(entity.getUserId());
-            if(userEntity != null){
+            if (userEntity != null) {
                 detailEntity.setUser(userEntity);
-            }else {
+            } else {
                 detailEntity.setUser(new CoverUserEntity());
             }
             commentDetailList.add(detailEntity);

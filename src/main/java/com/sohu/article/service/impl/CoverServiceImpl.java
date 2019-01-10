@@ -43,7 +43,7 @@ public class CoverServiceImpl implements CoverService {
         PageHelper.startPage(pageNo, pageSize);
         List<CoverImgEntity> list = coverImgEntityMapper.selectByExample(example);
         PageInfo<CoverImgEntity> paginator = new PageInfo<>(list);
-        pageResultBean.setTotal((int)total);
+        pageResultBean.setTotal((int) total);
         pageResultBean.setList(paginator.getList());
         return pageResultBean;
     }
@@ -53,11 +53,18 @@ public class CoverServiceImpl implements CoverService {
         CoverImgEntityExample example = new CoverImgEntityExample();
         example.createCriteria().andCoverIdEqualTo(coverId);
         CoverImgEntity imgEntity = coverImgEntityMapper.selectOneByExample(example);
-        if(imgEntity != null){
-            imgEntity.setZanNums(imgEntity.getZanNums()+1);
+        if (imgEntity != null) {
+            imgEntity.setZanNums(imgEntity.getZanNums() + 1);
             coverImgEntityMapper.updateByPrimaryKeySelective(imgEntity);
-        }else {
+        } else {
             throw new TipException("没有找到对应的贺卡信息");
         }
+    }
+
+    @Override
+    public void updateCoverCommentNum(Integer commentNum, Integer coverId) {
+        CoverImgEntity entity = coverImgEntityMapper.selectByPrimaryKey(coverId);
+        entity.setCommentNums(commentNum);
+        coverImgEntityMapper.updateByPrimaryKeySelective(entity);
     }
 }
