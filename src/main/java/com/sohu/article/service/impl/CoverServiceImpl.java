@@ -50,6 +50,9 @@ public class CoverServiceImpl implements CoverService {
 
     @Override
     public void coverClick(Integer coverId) {
+        if (coverId ==0) {
+            throw  new TipException("贺卡id不能为空");
+        }
         CoverImgEntityExample example = new CoverImgEntityExample();
         example.createCriteria().andCoverIdEqualTo(coverId);
         CoverImgEntity imgEntity = coverImgEntityMapper.selectOneByExample(example);

@@ -25,7 +25,7 @@ public class CoverWishesEntity implements Serializable {
      *
      * @mbg.generated Mon Jan 07 16:31:30 CST 2019
      */
-    @ApiModelProperty(value="wishType贺词类型")
+    @ApiModelProperty(value="wishType贺词类型 ")
     private String wishType;
 
     /**

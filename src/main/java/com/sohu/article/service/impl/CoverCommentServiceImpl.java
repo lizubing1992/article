@@ -6,12 +6,14 @@ import com.sohu.article.base.PageResultBean;
 import com.sohu.article.constant.WebConst;
 import com.sohu.article.dao.CoverCommentEntityMapper;
 import com.sohu.article.dto.CommentDetailEntity;
+import com.sohu.article.exception.TipException;
 import com.sohu.article.model.CoverCommentEntity;
 import com.sohu.article.model.CoverCommentEntityExample;
 import com.sohu.article.model.CoverUserEntity;
 import com.sohu.article.service.CoverCommentService;
 import com.sohu.article.service.CoverService;
 import com.sohu.article.service.CoverUserService;
+import com.sohu.article.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,15 @@ public class CoverCommentServiceImpl implements CoverCommentService {
 
     @Override
     public void addComment(String comment, Integer userId, Integer coverId) {
+        if (StringUtils.isBlank(comment)) {
+            throw  new TipException("评论内容不能为空！");
+        }
+        if (userId == 0) {
+            throw  new TipException("客户id不能为空，请登录");
+        }
+        if (coverId ==0) {
+            throw  new TipException("贺卡id不能为空");
+        }
         CoverCommentEntity entity = new CoverCommentEntity();
         entity.setCommentContent(comment);
         entity.setUserId(userId);
@@ -53,6 +64,9 @@ public class CoverCommentServiceImpl implements CoverCommentService {
 
     @Override
     public PageResultBean<CommentDetailEntity> list(Integer coverId, Integer pageNo, Integer pageSize) {
+        if (coverId ==0) {
+            throw  new TipException("贺卡id不能为空");
+        }
         PageResultBean<CommentDetailEntity> pageResultBean = new PageResultBean();
         List<CommentDetailEntity> commentDetailList = new ArrayList<>();
         pageNo = pageNo < 0 || pageNo > WebConst.MAX_PAGE ? 1 : pageNo;
