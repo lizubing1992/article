@@ -26,12 +26,23 @@ public class CoverServiceImpl implements CoverService {
     private CoverImgEntityMapper coverImgEntityMapper;
 
     @Override
-    public void addCoverImg(String imgUrl) {
+    public void addCoverImg(String imgUrl,String imgType,String wishType) {
         CoverImgEntity entity = new CoverImgEntity();
         entity.setImgUrl(imgUrl);
         entity.setCommentNums(0);
         entity.setZanNums(0);
+        entity.setImgType(imgType);
+        entity.setWishType(wishType);
         coverImgEntityMapper.insert(entity);
+    }
+
+    @Override
+    public void updateCover(Integer coverId,String imgType,String wishType) {
+        CoverImgEntity entity = coverImgEntityMapper.selectByPrimaryKey(coverId);
+        entity.setCoverId(coverId);
+        entity.setImgType(imgType);
+        entity.setWishType(wishType);
+        coverImgEntityMapper.updateByPrimaryKey(entity);
     }
 
     @Override
@@ -39,6 +50,21 @@ public class CoverServiceImpl implements CoverService {
         PageResultBean<CoverImgEntity> pageResultBean = new PageResultBean<>();
         pageNo = pageNo < 0 || pageNo > WebConst.MAX_PAGE ? 1 : pageNo;
         CoverImgEntityExample example = new CoverImgEntityExample();
+        long total = coverImgEntityMapper.countByExample(example);
+        PageHelper.startPage(pageNo, pageSize);
+        List<CoverImgEntity> list = coverImgEntityMapper.selectByExample(example);
+        PageInfo<CoverImgEntity> paginator = new PageInfo<>(list);
+        pageResultBean.setTotal((int) total);
+        pageResultBean.setList(paginator.getList());
+        return pageResultBean;
+    }
+
+    @Override
+    public PageResultBean<CoverImgEntity> list(Integer pageNo, Integer pageSize, String type) {
+        PageResultBean<CoverImgEntity> pageResultBean = new PageResultBean<>();
+        pageNo = pageNo < 0 || pageNo > WebConst.MAX_PAGE ? 1 : pageNo;
+        CoverImgEntityExample example = new CoverImgEntityExample();
+        example.createCriteria().andImgTypeEqualTo(type);
         long total = coverImgEntityMapper.countByExample(example);
         PageHelper.startPage(pageNo, pageSize);
         List<CoverImgEntity> list = coverImgEntityMapper.selectByExample(example);

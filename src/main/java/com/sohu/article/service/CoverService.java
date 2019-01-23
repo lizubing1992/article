@@ -10,11 +10,15 @@ import com.sohu.article.model.CoverImgEntity;
  */
 public interface CoverService {
 
-    void addCoverImg(String imgUrl);
+    void addCoverImg(String imgUrl, String imgType, String wishType);
+
+    void updateCover(Integer coverId, String imgType, String wishType);
 
     PageResultBean<CoverImgEntity> list(Integer pageNo, Integer pageSize);
 
+    PageResultBean<CoverImgEntity> list(Integer pageNo, Integer pageSize, String type);
+
     void coverClick(Integer coverId);
 
-    void updateCoverCommentNum(Integer commentNum,Integer coverId);
+    void updateCoverCommentNum(Integer commentNum, Integer coverId);
 }
