@@ -65,7 +65,7 @@ public class CoverImgEntity implements Serializable {
      *
      * @mbg.generated Tue Jan 22 11:25:54 CST 2019
      */
-    @ApiModelProperty(value="wishType")
+    @ApiModelProperty(value="wishType 贺词类型")
     private String wishType;
 
     /**
@@ -75,7 +75,7 @@ public class CoverImgEntity implements Serializable {
      *
      * @mbg.generated Tue Jan 22 11:25:54 CST 2019
      */
-    @ApiModelProperty(value="imgType")
+    @ApiModelProperty(value="imgType 类型")
     private String imgType;
 
     /**

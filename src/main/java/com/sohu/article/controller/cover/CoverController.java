@@ -32,7 +32,7 @@ public class CoverController {
             @ApiImplicitParam(name = "pageSize", value = "页面值", required = false, dataType = "int", paramType = "query", defaultValue = "20")})
     @GetMapping("/img/list")
     public WebResponse<PageResultBean<CoverImgEntity>> list(Integer pageNo, Integer pageSize) {
-        return ResponseBuilder.build(coverService.list(pageNo, pageSize));
+        return ResponseBuilder.build(coverService.list(pageNo, pageSize,"img"));
     }
 
     @ApiOperation(value = "获取贺卡列表", notes = "获取贺卡列表")
@@ -65,7 +65,7 @@ public class CoverController {
     @PostMapping("/img/update")
     public WebResponse<String> updateCover(Integer coverId, String imgType, String wishType) {
         coverService.updateCover(coverId,imgType,wishType);
-        return ResponseBuilder.build("贺卡加入成功!");
+        return ResponseBuilder.build("修改成功！!");
     }
 
 
