@@ -69,12 +69,14 @@ public class CoverShareServiceImpl implements CoverShareService {
         CoverShareDetailEntity detailEntity = new CoverShareDetailEntity();
         CoverShareEntity coverShareEntity = shareEntityMapper.selectByPrimaryKey(shareId);
         CoverUserEntity userEntity = userService.queryById(coverShareEntity.getUserId());
-        CoverImgEntity coverImgEntity = coverService.selectById(coverShareEntity.getShareId());
-        CoverMusicEntity musicEntity = musicService.selectById(coverShareEntity.getShareId());
-        detailEntity.setMusicEntity(musicEntity);
-        detailEntity.setImgEntity(coverImgEntity);
-        detailEntity.setUserEntity(userEntity);
-        detailEntity.setShareEntity(coverShareEntity);
+        CoverImgEntity coverImgEntity = coverService.selectById(coverShareEntity.getImgId());
+        CoverMusicEntity musicEntity = musicService.selectById(coverShareEntity.getMusicId());
+        detailEntity.setUsername(userEntity.getUsername());
+        detailEntity.setAvatar(userEntity.getAvatar());
+        detailEntity.setShareDate(coverShareEntity.getShareDate());
+        detailEntity.setImgUrl(coverImgEntity.getImgUrl());
+        detailEntity.setWishWord(coverShareEntity.getWishWord());
+        detailEntity.setMusicUrl(musicEntity.getMusicUrl());
         return detailEntity;
     }
 }
