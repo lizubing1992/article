@@ -35,7 +35,7 @@ public class CoverShareServiceImpl implements CoverShareService {
 
 
     @Override
-    public void addCoverShare(Integer musicId, Integer userId, Integer wishId, Integer coverId, String shareWish) {
+    public Integer addCoverShare(Integer musicId, Integer userId, Integer wishId, Integer coverId, String shareWish) {
         if (coverId <= 0) {
             throw new TipException("贺卡id不能为空");
         }
@@ -58,6 +58,7 @@ public class CoverShareServiceImpl implements CoverShareService {
         }
         entity.setShareDate(new Date());
         shareEntityMapper.insert(entity);
+        return entity.getShareId();
     }
 
     @Override

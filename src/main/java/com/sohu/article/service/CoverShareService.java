@@ -9,7 +9,7 @@ import com.sohu.article.dto.CoverShareDetailEntity;
  */
 public interface CoverShareService {
 
-    void addCoverShare(Integer musicId, Integer userId, Integer wishId, Integer coverId, String shareWish);
+    Integer addCoverShare(Integer musicId, Integer userId, Integer wishId, Integer coverId, String shareWish);
 
     CoverShareDetailEntity index(Integer shareId);
 }

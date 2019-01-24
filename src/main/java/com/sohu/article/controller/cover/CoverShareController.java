@@ -41,9 +41,9 @@ public class CoverShareController {
             @ApiImplicitParam(name = "shareWish", value = "贺词内容", required = true, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "wishId", value = "贺词id，自己选择的则填写id", required = false, dataType = "Integer", paramType = "query")})
     @PostMapping("/add")
-    public WebResponse<String> add(Integer musicId, Integer userId, Integer wishId, Integer coverId, String shareWish) {
-        shareService.addCoverShare(musicId,userId,wishId,coverId,shareWish);
-        return build("分享添加成功!");
+    public WebResponse<Integer> add(Integer musicId, Integer userId, Integer wishId, Integer coverId, String shareWish) {
+        Integer shareId = shareService.addCoverShare(musicId, userId, wishId, coverId, shareWish);
+        return ResponseBuilder.build(200,"分享添加成功!",shareId);
     }
 
 
