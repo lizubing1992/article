@@ -64,4 +64,25 @@ CREATE TABLE cover_user(
 	PRIMARY KEY(id)
 )ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT '贺卡用户表';
 
+CREATE TABLE cover_music(
+	music_id INTEGER(11) NOT NULL AUTO_INCREMENT COMMENT '歌曲id',
+	music_url VARCHAR(255) NOT NULL COMMENT '歌曲url',
+	music_name VARCHAR(255) NOT NULL COMMENT '歌曲名',
+	music_author VARCHAR(255) NOT NULL COMMENT '歌曲作者',
+	version INTEGER(11) COMMENT '乐观锁',
+	PRIMARY KEY(music_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT '歌曲表';
+
+CREATE TABLE cover_share(
+	share_id INTEGER(11) NOT NULL AUTO_INCREMENT COMMENT '分享id',
+	music_id INTEGER(11) NOT NULL COMMENT '歌曲id',
+	user_id INTEGER(11) NOT NULL COMMENT '用户id',
+	img_id INTEGER(11) NOT NULL COMMENT '贺词背景图片id',
+	wish_id INTEGER(11) COMMENT '贺词表主键id',
+	wish_word LONGTEXT COMMENT '贺词',
+	share_date DATE COMMENT '分享时间',
+	version INTEGER(11) COMMENT '乐观锁',
+	PRIMARY KEY(share_id)
+)ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT '贺卡分享表';
+
 

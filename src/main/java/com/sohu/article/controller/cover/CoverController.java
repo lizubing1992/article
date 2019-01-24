@@ -5,6 +5,7 @@ import com.sohu.article.base.ResponseBuilder;
 import com.sohu.article.base.WebResponse;
 import com.sohu.article.model.CoverImgEntity;
 import com.sohu.article.service.CoverService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2019/1/3 16:22
  * @Description:
  */
+@Api(value = "贺卡列表", description = "贺卡列表")
 @RestController
 @RequestMapping("article/cover")
 public class CoverController {

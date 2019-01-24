@@ -5,6 +5,7 @@ import com.sohu.article.base.ResponseBuilder;
 import com.sohu.article.base.WebResponse;
 import com.sohu.article.model.CoverWishesEntity;
 import com.sohu.article.service.CoverWishService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: 2019/1/7 16:34
  * @Description:
  */
+@Api(value = "寄语相关",description = "寄语相关")
 @RestController
 @RequestMapping("/article/wish")
 public class CoverWishController {

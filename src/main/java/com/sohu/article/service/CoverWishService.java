@@ -11,4 +11,6 @@ import com.sohu.article.model.CoverWishesEntity;
  */
 public interface CoverWishService {
     PageResultBean<CoverWishesEntity> getListByType(String wishType, int pageSize, int pageNo);
+
+    CoverWishesEntity selectById(Integer wishId);
 }

@@ -45,4 +45,9 @@ public class CoverWishServiceImpl implements CoverWishService {
         pageResultBean.setList(pageInfo.getList());
         return pageResultBean;
     }
+
+    @Override
+    public CoverWishesEntity selectById(Integer wishId) {
+        return coverWishesEntityMapper.selectByPrimaryKey(wishId);
+    }
 }

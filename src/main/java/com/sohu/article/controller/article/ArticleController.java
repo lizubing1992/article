@@ -5,6 +5,7 @@ import com.sohu.article.base.ResponseBuilder;
 import com.sohu.article.base.WebResponse;
 import com.sohu.article.model.ArticleEntity;
 import com.sohu.article.service.ArticleService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  *  @author  lizubing1992
  */
+@Api(value = "文章相关",description = "文章相关")
 @RestController
 @RequestMapping("/article")
 public class ArticleController {

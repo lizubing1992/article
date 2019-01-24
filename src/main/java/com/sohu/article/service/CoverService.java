@@ -21,4 +21,6 @@ public interface CoverService {
     void coverClick(Integer coverId);
 
     void updateCoverCommentNum(Integer commentNum, Integer coverId);
+
+    CoverImgEntity selectById(Integer coverId);
 }
