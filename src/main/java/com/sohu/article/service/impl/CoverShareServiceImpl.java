@@ -48,9 +48,9 @@ public class CoverShareServiceImpl implements CoverShareService {
         CoverShareEntity entity = new CoverShareEntity();
         entity.setMusicId(musicId);
         entity.setUserId(userId);
-        entity.setWishId(wishId);
         entity.setImgId(coverId);
-        if(wishId  <= 0){
+        entity.setWishId(wishId);
+        if(null != wishId && wishId  > 0){
             CoverWishesEntity wishesEntity = wishService.selectById(wishId);
             entity.setWishWord(wishesEntity.getWishContent());
         }else {
