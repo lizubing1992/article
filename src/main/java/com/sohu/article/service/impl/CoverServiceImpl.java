@@ -33,6 +33,8 @@ public class CoverServiceImpl implements CoverService {
         entity.setZanNums(0);
         entity.setImgType(imgType);
         entity.setWishType(wishType);
+        entity.setImgSmallUrl(imgUrl.substring(0,imgUrl.length()-5)+"_small.webp");
+        entity.setImgBigUrl(imgUrl.substring(0,imgUrl.length()-5)+"_big.webp");
         coverImgEntityMapper.insert(entity);
     }
 

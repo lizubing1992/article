@@ -74,7 +74,7 @@ public class CoverShareServiceImpl implements CoverShareService {
         detailEntity.setUsername(userEntity.getUsername());
         detailEntity.setAvatar(userEntity.getAvatar());
         detailEntity.setShareDate(coverShareEntity.getShareDate());
-        detailEntity.setImgUrl(coverImgEntity.getImgUrl());
+        detailEntity.setImgUrl(coverImgEntity.getImgBigUrl());
         detailEntity.setWishWord(coverShareEntity.getWishWord());
         detailEntity.setMusicUrl(musicEntity.getMusicUrl());
         return detailEntity;
