@@ -5,6 +5,7 @@ import com.sohu.article.dto.CoverShareDetailEntity;
 import com.sohu.article.exception.TipException;
 import com.sohu.article.model.*;
 import com.sohu.article.service.*;
+import com.sohu.article.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,7 +75,11 @@ public class CoverShareServiceImpl implements CoverShareService {
         detailEntity.setUsername(userEntity.getUsername());
         detailEntity.setAvatar(userEntity.getAvatar());
         detailEntity.setShareDate(coverShareEntity.getShareDate());
-        detailEntity.setImgUrl(coverImgEntity.getImgBigUrl());
+        if(StringUtils.isBlank(coverImgEntity.getImgBigUrl())){
+            detailEntity.setImgUrl(coverImgEntity.getImgUrl());
+        }else {
+            detailEntity.setImgUrl(coverImgEntity.getImgBigUrl());
+        }
         detailEntity.setWishWord(coverShareEntity.getWishWord());
         detailEntity.setMusicUrl(musicEntity.getMusicUrl());
         return detailEntity;
