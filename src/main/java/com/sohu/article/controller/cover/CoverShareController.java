@@ -51,7 +51,7 @@ public class CoverShareController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "shareId", value = "分享id", required = true, dataType = "Integer", paramType = "query")})
     @GetMapping("/select")
-    public WebResponse<CoverShareDetailEntity> updateCover(Integer shareId) {
+    public WebResponse<CoverShareDetailEntity> get(Integer shareId) {
         return ResponseBuilder.build(shareService.index(shareId));
     }
 }

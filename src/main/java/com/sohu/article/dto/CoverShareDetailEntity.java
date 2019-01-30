@@ -15,7 +15,7 @@ public class CoverShareDetailEntity {
     @ApiModelProperty(value = "avatar用户头像")
     private String avatar;
     @ApiModelProperty(value = "shareDate分享时间")
-    private Date shareDate;
+    private String shareDate;
     @ApiModelProperty(value = "musicUrl歌曲url")
     private String musicUrl;
     @ApiModelProperty(value = "imgUrl封面url")
@@ -39,11 +39,11 @@ public class CoverShareDetailEntity {
         this.avatar = avatar;
     }
 
-    public Date getShareDate() {
+    public String getShareDate() {
         return shareDate;
     }
 
-    public void setShareDate(Date shareDate) {
+    public void setShareDate(String shareDate) {
         this.shareDate = shareDate;
     }
 

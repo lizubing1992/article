@@ -5,10 +5,14 @@ import com.sohu.article.dto.CoverShareDetailEntity;
 import com.sohu.article.exception.TipException;
 import com.sohu.article.model.*;
 import com.sohu.article.service.*;
+import com.sohu.article.utils.LunaUtils;
 import com.sohu.article.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -74,11 +78,24 @@ public class CoverShareServiceImpl implements CoverShareService {
         CoverMusicEntity musicEntity = musicService.selectById(coverShareEntity.getMusicId());
         detailEntity.setUsername(userEntity.getUsername());
         detailEntity.setAvatar(userEntity.getAvatar());
-        detailEntity.setShareDate(coverShareEntity.getShareDate());
-        if(StringUtils.isBlank(coverImgEntity.getImgBigUrl())){
-            detailEntity.setImgUrl(coverImgEntity.getImgUrl());
-        }else {
-            detailEntity.setImgUrl(coverImgEntity.getImgBigUrl());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String d = dateFormat.format(coverShareEntity.getShareDate());
+        Calendar today = Calendar.getInstance();
+        LunaUtils lunar = new LunaUtils(today);
+        try {
+            today.setTime(lunar.chineseDateFormat.parse(d));
+            detailEntity.setShareDate("农历" + lunar);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            detailEntity.setShareDate(lunar.chineseDateFormat.format(today.getTime()));
+        }
+        if(coverImgEntity != null){
+            if(StringUtils.isBlank(coverImgEntity.getImgBigUrl())){
+                detailEntity.setImgUrl(coverImgEntity.getImgUrl());
+            }else {
+                detailEntity.setImgUrl(coverImgEntity.getImgBigUrl());
+            }
         }
         detailEntity.setWishWord(coverShareEntity.getWishWord());
         detailEntity.setMusicUrl(musicEntity.getMusicUrl());
