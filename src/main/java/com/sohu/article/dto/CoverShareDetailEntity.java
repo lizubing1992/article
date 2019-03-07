@@ -14,14 +14,24 @@ public class CoverShareDetailEntity {
     private String username;
     @ApiModelProperty(value = "avatar用户头像")
     private String avatar;
-    @ApiModelProperty(value = "shareDate分享时间")
+    @ApiModelProperty(value = "shareDate分享公历时间")
     private String shareDate;
+    @ApiModelProperty(value = "shareDate分享农历时间")
+    private String shareChinaDate;
     @ApiModelProperty(value = "musicUrl歌曲url")
     private String musicUrl;
     @ApiModelProperty(value = "imgUrl封面url")
     private String imgUrl;
     @ApiModelProperty(value = "wishWord贺词")
     private String wishWord;
+
+    public String getShareChinaDate() {
+        return shareChinaDate;
+    }
+
+    public void setShareChinaDate(String shareChinaDate) {
+        this.shareChinaDate = shareChinaDate;
+    }
 
     public String getUsername() {
         return username;

@@ -85,10 +85,12 @@ public class CoverShareServiceImpl implements CoverShareService {
         LunaUtils lunar = new LunaUtils(today);
         try {
             today.setTime(lunar.chineseDateFormat.parse(d));
-            detailEntity.setShareDate("农历" + lunar);
+            detailEntity.setShareDate(d);
+            detailEntity.setShareChinaDate("农历" + lunar);
         } catch (ParseException e) {
             e.printStackTrace();
-            detailEntity.setShareDate(lunar.chineseDateFormat.format(today.getTime()));
+            detailEntity.setShareDate(d);
+            detailEntity.setShareChinaDate("农历" +lunar.chineseDateFormat.format(today.getTime()));
         }
         if(coverImgEntity != null){
             if(StringUtils.isBlank(coverImgEntity.getImgBigUrl())){
