@@ -13,4 +13,6 @@ public interface CoverWishService {
     PageResultBean<CoverWishesEntity> getListByType(String wishType, int pageSize, int pageNo);
 
     CoverWishesEntity selectById(Integer wishId);
+
+    CoverWishesEntity selectByRandomAphorism();
 }

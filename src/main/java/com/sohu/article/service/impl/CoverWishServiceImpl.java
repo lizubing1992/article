@@ -50,4 +50,9 @@ public class CoverWishServiceImpl implements CoverWishService {
     public CoverWishesEntity selectById(Integer wishId) {
         return coverWishesEntityMapper.selectByPrimaryKey(wishId);
     }
+
+    @Override
+    public CoverWishesEntity selectByRandomAphorism() {
+        return coverWishesEntityMapper.selectByRandomAphorism("aphorism");
+    }
 }
